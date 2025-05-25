@@ -7,7 +7,7 @@
     "applicationVersion": {
       "version": "0.0.1"
     },
-    "title": "{{appTitle}}",
+    "title": "{{LibraryManagement}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
     "sourceTemplate": {
@@ -70,7 +70,7 @@
         "viewType": "XML",
         "path": "libmanage.view",
         "async": true,
-        "viewPath": "libmanage.view"
+        "viewPath": "libmanage.webapp.view"
       },
       "routes": [
         {
@@ -84,7 +84,12 @@
         "name":"View2",
         "pattern":"View2",
         "target":["TargetView2"]
-        }
+        },
+        {
+          "name":"View3",
+          "pattern":"View3",
+          "target":["TargetView3"]
+          }
       ],
       "targets": {
         "TargetView1": {
@@ -94,6 +99,10 @@
         "TargetView2":{
           "id":"View2",
           "name":"View2"
+        },
+        "TargetView3":{
+          "id":"View3",
+          "name":"View3"
         }
       }
     },

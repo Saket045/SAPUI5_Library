@@ -3,7 +3,11 @@
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
   xmlns:core="sap.ui.core"
-  displayBlock="true">
+  displayBlock="true"
+	xmlns:u="sap.ui.unified"
+  xmlns:ui="sap.ui.table"
+	xmlns:m="sap.m"
+	height="100%">
 
   <VBox class="sapUiSmallMargin">
 
@@ -17,48 +21,80 @@
       <Input id="filterInput" placeholder="Enter name or book..."/>
       <Button text="Search" class="sapUiTinyMarginBegin" />
     </HBox>
-    <HBox>
+    <!-- <HBox>
         <Button text="Create" icon="sap-icon://add" type="Emphasized" class="sapUiTinyMarginEnd" press="createRoute" />
         <Button text="Delete" icon="sap-icon://delete" type="Reject" />
+      </HBox> -->
       </HBox>
-      </HBox>
-  
-    <Table
-      id="libraryTable"
-      inset="false"
-      items="{
-        path: '/books'
-      }">
-      <columns>
-        <Column>
-          <Text text="Name" />
-        </Column>
-        <Column>
-          <Text text="Book Issued" />
-        </Column>
-        <Column>
-          <Text text="Issue Date" />
-        </Column>
-        <Column>
-          <Text text="Expiry Date" />
-        </Column>
-        <Column>
-          <Text text="Status" />
-        </Column>
-      </columns>
 
-      <items>
-        <ColumnListItem>
-          <cells>
-            <Text text="{name}" />
-            <Text text="{book}" />
-            <Text text="{issueDate}" />
-            <Text text="{expiryDate}" />
-            <Text text="{status}" />
-          </cells>
-        </ColumnListItem>
-      </items>
-    </Table>
+   <ui:Table
+  id="libraryTable"
+  rows="{/books}"
+  selectionMode="MultiToggle"
+  enableBusyIndicator="true"
+  columnHeaderVisible="true"
+  ariaLabelledBy="title"
+  width="100%">
+  <ui:extension>
+    <OverflowToolbar >
+    <Title text="Library Records" />
+    <ToolbarSpacer />
+    <HBox >
+    <Button icon="sap-icon://create" text="Create" press="createRoute"  class="sapUiTinyMarginEnd"/>
+    <Button icon="sap-icon://decline" text="Delete" press="onDeleteSelected"  class="sapUiTinyMarginEnd" /> 
+    <Button icon="sap-icon://edit" text="Edit"  press="newEditPage" /> 
+    </HBox>	
+  </OverflowToolbar>
+  </ui:extension>
+
+  <ui:columns>
+    <ui:Column>
+      <ui:label>
+        <Label text="Name" />
+      </ui:label>
+      <ui:template>
+        <Text text="{name}" />
+      </ui:template>
+    </ui:Column>
+
+    <ui:Column>
+      <ui:label>
+        <Label text="Book Issued" />
+      </ui:label>
+      <ui:template>
+        <Text text="{book}" />
+      </ui:template>
+    </ui:Column>
+
+    <ui:Column>
+      <ui:label>
+        <Label text="Issue Date" />
+      </ui:label>
+      <ui:template>
+        <Text text="{issueDate}" />
+      </ui:template>
+    </ui:Column>
+
+    <ui:Column>
+      <ui:label>
+        <Label text="Expiry Date" />
+      </ui:label>
+      <ui:template>
+        <Text text="{expiryDate}" />
+      </ui:template>
+    </ui:Column>
+
+    <ui:Column>
+      <ui:label>
+        <Label text="Status" />
+      </ui:label>
+      <ui:template>
+        <Text text="{status}" />
+      </ui:template>
+    </ui:Column>
+  </ui:columns>
+</ui:Table>
+
 
   </VBox>
 </mvc:View>

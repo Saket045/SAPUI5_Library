@@ -1,6 +1,52 @@
 <mvc:View
   xmlns:mvc="sap.ui.core.mvc"
   xmlns="sap.m"
-  displayBlock="true">
-  <App id="app" />
+  displayBlock="true"
+  controllerName="libmanage.controller.View2"
+  xmlns:layout="sap.ui.layout.form"
+  >
+<Page> 
+  <VBox class="sapUiSmallMargin">
+  <Title text="Library Management System" level="H1" titleStyle="H1" class="sapUiSmallMarginBottom" />
+
+<layout:SimpleForm
+    id="libraryForm"
+    title="Issue Book"
+    class="sapUiSmallMargin">
+<VBox>
+   <Input id="inputName" placeholder="Enter name" value="{form>/name}" width="20%" change="onInputChange" name="name" />
+
+<Input id="inputBook" placeholder="Enter book name" value="{form>/book}" width="20%" change="onInputChange" name="book" />
+
+<DatePicker
+  id="inputIssued"
+  placeholder="YYYY-MM-DD"
+  width="20%"
+  value="{form>/issueDate}"
+  valueFormat="yyyy-MM-dd"
+  displayFormat="long"
+  change="onInputChange"
+  name="issuedDate" />
+
+<DatePicker
+  id="inputExpiry"
+  placeholder="YYYY-MM-DD"
+  width="20%"
+  value="{form>/expiryDate}"
+  valueFormat="yyyy-MM-dd"
+  displayFormat="long"
+  change="onInputChange"
+  name="expiryDate" />
+</VBox>
+  </layout:SimpleForm>
+
+</VBox>
+ <footer >
+    <Toolbar>
+      <ToolbarSpacer />
+      <Button text="Cancel" type="Reject" press="onCancelPress" />
+      <Button text="Save" type="Emphasized" press="onSavePress" class="sapUiLargeMarginEnd" />
+    </Toolbar>
+  </footer>
+  </Page>
 </mvc:View>
