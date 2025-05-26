@@ -40,9 +40,9 @@
     <Title text="Library Records" />
     <ToolbarSpacer />
     <HBox >
-    <Button icon="sap-icon://create" text="Create" press="createRoute"  class="sapUiTinyMarginEnd"/>
-    <Button icon="sap-icon://decline" text="Delete" press="onDeleteSelected"  class="sapUiTinyMarginEnd" /> 
-    <Button icon="sap-icon://edit" text="Edit"  press="newEditPage" /> 
+    <Button text="Create" press="createRoute"  class="sapUiTinyMarginEnd"/>
+    <Button text="Delete" press="onDeleteSelected"  class="sapUiTinyMarginEnd" /> 
+    <Button text="Edit"  press="newEditPage" /> 
     </HBox>	
   </OverflowToolbar>
   </ui:extension>
@@ -84,14 +84,14 @@
       </ui:template>
     </ui:Column>
 
-    <ui:Column>
+    <!-- <ui:Column>
       <ui:label>
         <Label text="Status" />
       </ui:label>
       <ui:template>
         <Text text="{status}" />
       </ui:template>
-    </ui:Column>
+    </ui:Column> -->
   </ui:columns>
 </ui:Table>
 

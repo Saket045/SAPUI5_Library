@@ -16,7 +16,7 @@ export default class View1 extends Controller {
   
     const formDataListModel = new JSONModel(parsed);
     owner.setModel(formDataListModel, "formDataList");
-console.log(owner.getModel());
+    console.log(owner.getModel());
     this.formModel = new JSONModel({
       name: "",
       book: "",
@@ -44,24 +44,55 @@ console.log(owner.getModel());
 
   public onSavePress(): void {
     const owner = this.getOwnerComponent() as any;
-    const data = this.formModel.getData(); // current form values
+    const oView = this.getView() as any;
+    const data = this.formModel.getData(); 
+    const name = (oView.byId("inputName") as any).getValue();
+    const book = (oView.byId("inputBook") as any).getValue();
+    let issueDate = oView.byId("inputIssued").getValue();
+    let expiryDate = oView.byId("inputExpiry").getValue();
   
-    // Get the list model (array of entries)
+  expiryDate = new Date(data.expiryDate).toISOString().slice(0, 10);
+  console.log(name , book , issueDate , expiryDate);
+   if(name === ""){
+   MessageToast.show("Name is invalid");
+   return;
+   }
+   if(book === ""){
+   MessageToast.show("Book is invalid");
+   return;
+   }
+
+   if(!issueDate){
+   MessageToast.show("Issue date not valid");
+   return;
+   }
+   if(!expiryDate){
+   MessageToast.show("Expiry date not valid");
+   return;
+   }
+
+  issueDate = new Date(issueDate);
+  expiryDate = new Date(expiryDate);
+   
+   if (issueDate && expiryDate && expiryDate <= issueDate) {
+     MessageToast.show("Expiry Date cannot be less than or equal to Issue Date");
+     return;
+   }
+
     let formDataModel = owner.getModel("formDataList") as JSONModel;
     if (!formDataModel) {
       formDataModel = new JSONModel([]);
       owner.setModel(formDataModel, "formDataList");
     }
+  const updatedList = JSON.parse(localStorage.getItem("formDataList") || "[]");
+updatedList.push({
+  ...data,
+  expiryDate: new Date(data.expiryDate).toISOString().slice(0, 10),
+});
+
+formDataModel.setData(updatedList); 
+localStorage.setItem("formDataList", JSON.stringify(updatedList)); 
   
-    // Push current data into the list
-    const savedList = formDataModel.getData(); // this is an array
-    savedList.push({ ...data }); // clone the object to avoid mutation
-    formDataModel.setData(savedList); // update the model
-   console.log(formDataModel , "main");
-    // Save to localStorage to persist across sessions
-    localStorage.setItem("formDataList", JSON.stringify(savedList));
-  
-    // Optionally reset the form
     this.formModel.setData({
       name: "",
       book: "",

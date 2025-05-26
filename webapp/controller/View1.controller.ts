@@ -23,14 +23,11 @@ export default class View1 extends Controller {
   
     const oModel = new JSONModel({ books: data });
     (this.getView() as any).setModel(oModel);
-  
-    MessageToast.show("View1 refreshed with latest data!");
   }
   
    public createRoute(): void {
     const owner = this.getOwnerComponent() as any;
     const Router = owner.getRouter() as any;
-    console.log("page changed");
     Router.navTo("View2");
    }
   //  public onDeleteSelected1(): void {
@@ -74,12 +71,12 @@ export default class View1 extends Controller {
       MessageToast.show("No rows selected.");
       return;
     }
-  const sData = localStorage.getItem("formDataList");
+    const sData = localStorage.getItem("formDataList");
     const libraryData = sData ? JSON.parse(sData) : [];
 
     const indexesToDelete = selectedIndices.map((index: number) => {
       const context = table.getContextByIndex(index);
-      const path = context.getPath(); // e.g., "/books/2"
+      const path = context.getPath(); 
       return parseInt(path.split("/")[2]);
     });
     
